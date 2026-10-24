@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">مهندس یاشار رضوانی | مهندس ارشد دواپس و زیرساخت</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#00D4FF',
+                            blue: '#326CE5',
+                            green: '#10B981',
+                            dark: '#080C14',
+                            card: 'rgba(15, 23, 42, 0.78)',
+                            terminal: '#0D1117'
+                        }
+                    },
+                    fontFamily: {
+                        vazir: ['Vazirmatn', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Fallback SVG Data URL for Yashar's DevOps avatar */
+            --bg-img: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%230b132b"/><stop offset="50%" stop-color="%231c2541"/><stop offset="100%" stop-color="%2300b4d8"/></linearGradient></defs><rect width="800" height="800" fill="url(%23g)"/><circle cx="400" cy="300" r="160" fill="%233a506b" opacity="0.6"/><path d="M 200 700 Q 400 450 600 700 Z" fill="%233a506b" opacity="0.6"/><text x="400" y="320" font-family="monospace" font-size="64" fill="%2300f5d4" text-anchor="middle">YASHAR</text><text x="400" y="380" font-family="monospace" font-size="28" fill="%23ffffff" text-anchor="middle">DEVOPS ENGINEER</text></svg>');
+        }
+
+        body {
+            background-color: #080C14;
+            color: #E5E7EB;
+            font-family: 'Vazirmatn', sans-serif;
+            overflow-x: hidden;
+            word-wrap: break-word;
+            overflow-wrap: anywhere;
+        }
+
+        /* Hero Background with Dark Overlay for Maximum Contrast */
+        .bg-custom-hero {
+            background-image: linear-gradient(to bottom, rgba(8, 12, 20, 0.88), rgba(8, 12, 20, 0.96)), var(--bg-img);
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
+        }
+
+        /* Glassmorphism Effect with strict bounds */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 100%;
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(0, 212, 255, 0.35);
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.15);
+        }
+
+        /* Fix text overflow for technical names like Kubernetes */
+        .prevent-overflow {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080C14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1F2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00D4FF;
+        }
+
+        /* Terminal Scanline effect */
+        .scanlines {
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%, 
+                rgba(0, 0, 0, 0.25) 50%
+            );
+            background-size: 100% 4px;
+        }
+
+        [dir="ltr"] {
+            font-family: 'Inter', sans-serif;
+        }
+        [dir="ltr"] .font-code {
+            font-family: 'Fira Code', monospace;
+        }
+    </style>
+</head>
+<body class="selection:bg-brand-cyan selection:text-black min-h-screen bg-custom-hero">
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-gray-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 group shrink-0">
+                <span class="text-brand-cyan font-mono font-bold text-base sm:text-xl group-hover:text-white transition">&gt;_ yashar.dev</span>
+                <span class="inline-block w-2 h-4 bg-brand-cyan animate-pulse"></span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-4 lg:gap-8 text-sm font-medium text-gray-300">
+                <a href="#about" class="hover:text-brand-cyan transition" data-fa="درباره من" data-en="About Me">درباره من</a>
+                <a href="#skills" class="hover:text-brand-cyan transition" data-fa="مهارت‌ها و ابزارها" data-en="Tech Stack">مهارت‌ها و ابزارها</a>
+                <a href="#projects" class="hover:text-brand-cyan transition" data-fa="معماری و پروژه‌ها" data-en="Architecture">معماری و پروژه‌ها</a>
+                <a href="#terminal" class="hover:text-brand-cyan transition" data-fa="ترمینال تعاملی" data-en="Terminal">ترمینال تعاملی</a>
+                <a href="#contact" class="hover:text-brand-cyan transition" data-fa="ارتباط با من" data-en="Contact">ارتباط با من</a>
+            </nav>
+
+            <!-- Language Switcher & Action Button -->
+            <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+                <button onclick="toggleLanguage()" id="lang-btn" class="px-3 py-1.5 rounded-xl glass-panel text-xs font-semibold text-brand-cyan border border-brand-cyan/30 hover:bg-brand-cyan hover:text-black transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-globe text-sm"></i>
+                    <span id="lang-label">EN / English</span>
+                </button>
+
+                <a href="#contact" class="hidden sm:inline-flex px-4 py-2 text-xs font-semibold rounded-xl bg-brand-cyan text-black hover:bg-cyan-300 transition shadow-lg shadow-brand-cyan/20">
+                    <span data-fa="ارسال پیام" data-en="Get In Touch">ارسال پیام</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24">
+        <!-- Hero Section -->
+        <section class="relative min-h-[85vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
+            <div class="max-w-6xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- Profile Image Avatar Container -->
+                <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 w-full">
+                    <div class="relative group w-full max-w-xs sm:max-w-sm">
+                        <!-- Glow Background -->
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-cyan via-blue-500 to-indigo-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-80 transition duration-500"></div>
+                        
+                        <!-- Image Container with multiple fallback levels -->
+                        <div class="relative glass-panel p-3 rounded-3xl overflow-hidden border border-gray-700 bg-gray-900/90">
+                            <img id="user-avatar" 
+                                 src="1000009200.jpg" 
+                                 alt="مهندس یاشار رضوانی" 
+                                 class="w-full h-80 sm:h-96 rounded-2xl object-cover object-top shadow-2xl transition duration-500 group-hover:scale-105" 
+                                 onerror="handleImageError(this)">
+                            
+                            <!-- Status Overlay Badge -->
+                            <div class="absolute bottom-5 right-5 left-5 glass-panel p-3 rounded-xl border border-gray-700/80 flex items-center gap-3">
+                                <span class="relative flex h-3 w-3 shrink-0">
+                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                  <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                                </span>
+                                <div class="text-xs overflow-hidden">
+                                    <p class="font-bold text-white truncate" data-fa="آماده برای پروژه‌های زیرساخت" data-en="Available for Cloud & DevOps">آماده برای پروژه‌های زیرساخت</p>
+                                    <p class="text-gray-400 text-[10px] font-mono truncate">DevOps & Cloud Engineer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="lg:col-span-7 text-right order-2 lg:order-1 w-full" id="hero-text-container">
+                    
+                    <!-- Subtitle Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-cyan/10 border border-brand-cyan/30 text-brand-cyan text-xs font-mono mb-6 max-w-full">
+                        <i class="fa-solid fa-server shrink-0"></i>
+                        <span class="truncate" data-fa="مهندس ارشد زیرساخت و دواپس" data-en="DevOps & Infrastructure Engineer">مهندس ارشد زیرساخت و دواپس</span>
+                    </div>
+
+                    <!-- Main Title -->
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 text-white leading-tight prevent-overflow">
+                        <span data-fa="مهندس" data-en="Eng.">مهندس</span> 
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan via-blue-400 to-indigo-400">یاشار رضوانی</span>
+                    </h1>
+
+                    <!-- Description -->
+                    <p class="text-base sm:text-lg text-gray-300 font-light leading-relaxed mb-8 max-w-2xl prevent-overflow" 
+                       data-fa="متخصص اتوماسیون CI/CD، مدیریت ارکستراسیون کوبرنتیز (Kubernetes)، پیکربندی سرورهای لینوکس و استقرار زیرساخت‌های مقیاس‌پذیر و پایدار." 
+                       data-en="Specialized in CI/CD pipeline automation, Kubernetes container orchestration, Linux systems administration, and resilient cloud-native architectures.">
+                        متخصص اتوماسیون CI/CD، مدیریت ارکستراسیون کوبرنتیز (Kubernetes)، پیکربندی سرورهای لینوکس و استقرار زیرساخت‌های مقیاس‌پذیر و پایدار.
+                    </p>
+
+                    <!-- Stats Row - Fully Responsive -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8 w-full">
+                        <div class="glass-panel p-3 rounded-2xl text-center overflow-hidden">
+                            <div class="text-lg sm:text-xl font-bold font-mono text-brand-cyan truncate">99.9%</div>
+                            <div class="text-[11px] text-gray-400 mt-1 truncate" data-fa="پایداری (Uptime)" data-en="Target Uptime">پایداری (Uptime)</div>
+                        </div>
+                        
+                        <!-- Fixed Kubernetes text overflow inside stats box -->
+                        <div class="glass-panel p-3 rounded-2xl text-center overflow-hidden">
+                            <div class="text-sm sm:text-base font-bold font-mono text-emerald-400 truncate tracking-tighter" title="Kubernetes">Kubernetes</div>
+                            <div class="text-[11px] text-gray-400 mt-1 truncate" data-fa="کلاستر K8s / k3s" data-en="K8s / k3s Cluster">کلاستر K8s / k3s</div>
+                        </div>
+                        
+                        <div class="glass-panel p-3 rounded-2xl text-center overflow-hidden">
+                            <div class="text-lg sm:text-xl font-bold font-mono text-indigo-400 truncate">CI/CD</div>
+                            <div class="text-[11px] text-gray-400 mt-1 truncate" data-fa="خطوط لوله خودکار" data-en="Automated Pipelines">خطوط لوله خودکار</div>
+                        </div>
+                        
+                        <div class="glass-panel p-3 rounded-2xl text-center overflow-hidden">
+                            <div class="text-lg sm:text-xl font-bold font-mono text-amber-400 truncate">Linux</div>
+                            <div class="text-[11px] text-gray-400 mt-1 truncate" data-fa="مدیریت سرور" data-en="System Kernel">مدیریت سرور</div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="#projects" class="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-cyan to-brand-blue text-black font-bold hover:shadow-lg hover:shadow-brand-cyan/25 transition duration-300 flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <span data-fa="مشاهده معماری‌ها" data-en="View Architecture">مشاهده معماری‌ها</span>
+                        </a>
+                        <button onclick="copyEmail()" class="px-6 py-3 rounded-xl glass-panel font-semibold text-gray-300 hover:text-white transition flex items-center gap-2 text-sm">
+                            <i class="fa-regular fa-copy text-brand-cyan"></i>
+                            <span id="copyText" data-fa="کپی ایمیل ارتباطی" data-en="Copy Contact Email">کپی ایمیل ارتباطی</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+            <div class="flex items-center gap-3 mb-8">
+                <i class="fa-solid fa-microchip text-brand-cyan text-2xl shrink-0"></i>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white prevent-overflow" data-fa="درباره مهندس یاشار رضوانی" data-en="About Eng. Yashar Rezvani">درباره مهندس یاشار رضوانی</h2>
+            </div>
+
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-gray-800">
+                <p class="text-gray-300 leading-relaxed text-base sm:text-lg mb-6 prevent-overflow" 
+                   data-fa="من یاشار رضوانی هستم، متخصص و مهندس زیرساخت و دواپس (DevOps). تمرکز اصلی من روی خودکارسازی فرآیندهای توسعه، توسعه خطوط لوله CI/CD، مدیریت کانتینرها با Docker و Kubernetes و مانیتورینگ دقیق سیستم‌ها با استفاده از ابزارهای بروز مانند Prometheus و Grafana است." 
+                   data-en="I am Yashar Rezvani, a DevOps & Infrastructure Engineer focused on automating software development lifecycles, constructing scalable CI/CD pipelines, orchestrating containers with Docker and Kubernetes, and establishing observability with Prometheus and Grafana.">
+                    من یاشار رضوانی هستم، متخصص و مهندس زیرساخت و دواپس (DevOps). تمرکز اصلی من روی خودکارسازی فرآیندهای توسعه، توسعه خطوط لوله CI/CD، مدیریت کانتینرها با Docker و Kubernetes و مانیتورینگ دقیق سیستم‌ها با استفاده از ابزارهای بروز مانند Prometheus و Grafana است.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-gray-800/80">
+                    <div class="p-4 rounded-2xl bg-gray-900/50 border border-gray-800">
+                        <div class="text-brand-cyan font-bold text-base mb-1" data-fa="⚡ فلسفه کاری" data-en="⚡ Work Philosophy">⚡ فلسفه کاری</div>
+                        <p class="text-xs text-gray-400 prevent-overflow" data-fa="کاری که بیش از دو بار انجام شود، باید با کد خودکار گردد." data-en="If you have to perform a manual task more than twice, automate it with code.">کاری که بیش از دو بار انجام شود، باید با کد خودکار گردد.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-gray-900/50 border border-gray-800">
+                        <div class="text-emerald-400 font-bold text-base mb-1" data-fa="🛡️ امنیت و پایداری" data-en="🛡️ Security & Uptime">🛡️ امنیت و پایداری</div>
+                        <p class="text-xs text-gray-400 prevent-overflow" data-fa="سخت‌سازی سرورهای لینوکس، مدیریت فایروال و پیکربندی امن SSL." data-en="Server hardening, zero-downtime deployments, and end-to-end encryption.">سخت‌سازی سرورهای لینوکس، مدیریت فایروال و پیکربندی امن SSL.</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-gray-900/50 border border-gray-800">
+                        <div class="text-indigo-400 font-bold text-base mb-1" data-fa="🌐 ابر و رایانش" data-en="🌐 Cloud & Hybrid">🌐 ابر و رایانش</div>
+                        <p class="text-xs text-gray-400 prevent-overflow" data-fa="استقرار روی پلتفرم‌های ابری AWS، سیستم‌های Hybrids و هاستینگ مدرن." data-en="Deployments on AWS Cloud, Linux VPS, Dockerized infrastructure, and Vercel.">استقرار روی پلتفرم‌های ابری AWS، سیستم‌های Hybrids و هاستینگ مدرن.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Matrix Section (Overlapping & Text-wrapping Fixed) -->
+        <section id="skills" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="mb-10 text-right">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2 prevent-overflow" data-fa="مهارت‌ها و ابزارهای تخصص" data-en="Tech Stack & Skills Matrix">مهارت‌ها و ابزارهای تخصص</h2>
+                <p class="text-gray-400 text-sm prevent-overflow" data-fa="تکنولوژی‌ها و ابزارهایی که روزانه در زیرساخت استفاده می‌کنم:" data-en="Technologies and tools utilized for building cloud infrastructure:">تکنولوژی‌ها و ابزارهایی که روزانه در زیرساخت استفاده می‌کنم:</p>
+            </div>
+
+            <!-- Responsive Grid for Skill Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                
+                <!-- Kubernetes Card (Fixed Overflow) -->
+                <div class="glass-panel p-5 rounded-2xl border border-gray-800 hover:border-brand-cyan/50 transition w-full overflow-hidden">
+                    <div class="flex items-center justify-between mb-3 gap-2">
+                        <i class="fa-solid fa-dharmachakra text-brand-cyan text-2xl sm:text-3xl shrink-0"></i>
+                        <span class="text-[11px] font-mono text-brand-cyan bg-brand-cyan/10 px-2 py-0.5 rounded truncate">K8s / k3s</span>
+                    </div>
+                    <h3 class="font-bold text-white text-base truncate" title="Kubernetes">Kubernetes</h3>
+                    <p class="text-xs text-gray-400 mt-2 prevent-overflow" data-fa="ارکستراسیون کانتینرها، کنترل پادها و مدیریت Helm" data-en="Container Orchestration, Pod management & Helm">ارکستراسیون کانتینرها، کنترل پادها و مدیریت Helm</p>
+                </div>
+
+                <!-- Docker -->
+                <div class="glass-panel p-5 rounded-2xl border border-gray-800 hover:border-sky-400/50 transition w-full overflow-hidden">
+                    <div class="flex items-center justify-between mb-3 gap-2">
+                        <i class="fa-brands fa-docker text-sky-400 text-2xl sm:text-3xl shrink-0"></i>
+                        <span class="text-[11px] font-mono text-sky-400 bg-sky-400/10 px-2 py-0.5 rounded truncate">Containers</span>
+                    </div>
+                    <h3 class="font-bold text-white text-base truncate">Docker & Compose</h3>
+                    <p class="text-xs text-gray-400 mt-2 prevent-overflow" data-fa="کانتینرسازی پروژه‌ها و ایمیج‌های چندمرحله‌ای" data-en="Multi-stage Docker builds & Compose">کانتینرسازی پروژه‌ها و ایمیج‌های چندمرحله‌ای</p>
+                </div>
+
+                <!-- Ansible -->
+                <div class="glass-panel p-5 rounded-2xl border border-gray-800 hover:border-red-500/50 transition w-full overflow-hidden">
+                    <div class="flex items-center justify-between mb-3 gap-2">
+                        <i class="fa-solid fa-gears text-red-500 text-2xl sm:text-3xl shrink-0"></i>
+                        <span class="text-[11px] font-mono text-red-500 bg-red-500/10 px-2 py-0.5 rounded truncate">Automation</span>
+                    </div>
+                    <h3 class="font-bold text-white text-base truncate">Ansible</h3>
+                    <p class="text-xs text-gray-400 mt-2 prevent-overflow" data-fa="اتوماسیون پیکربندی سرورها با Playbook" data-en="Infrastructure Configuration as Code">اتوماسیون پیکربندی سرورها با Playbook</p>
+                </div>
+
+                <!-- Terraform -->
+                <div class="glass-panel p-5 rounded-2xl border border-gray-800 hover:border-purple-400/50 transition w-full overflow-hidden">
+                    <div class="flex items-center justify-between mb-3 gap-2">
+                        <i class="fa-solid fa-cubes text-purple-400 text-2xl sm:text-3xl shrink-0"></i>
+                        <span class="text-[11px] font-mono text-purple-400 bg-purple-400/10 px-2 py-0.5 rounded truncate">IaC</span>
+                    </div>
+                    <h3 class="font-bold text-white text-base truncate">Terraform</h3>
+                    <p class="text-xs text-gray-400 mt-2 prevent-overflow" data-fa="توسعه زیرساخت به عنوان کد (IaC)" data-en="Declarative Provisioning">توسعه زیرساخت به عنوان کد (IaC)</p>
+                </div>
+
+                <!-- Linux -->
+                <div class="glass-panel p-5 rounded-2xl border border-gray-800 hover:border-amber-400/50 transition w-full overflow-hidden">
+                    <div class="flex items-center justify-between mb-3 gap-2">
+                        <i class="fa-brands fa-linux text-amber-400 text-2xl sm:text-3xl shrink-0"></i>
+                        <span class="text-[11px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded truncate">OS Kernel</span>
+                    </div>
+                    <h3 class="font-bold text-white text-base truncate">Linux (Ubuntu/Debian)</h3>
+                    <p class="text-xs text-gray-400 mt-2 prevent-overflow" data-fa="مدیریت سرویس‌ها، Bash Scripting و امنیت" data-en="Bash Shell, Systemd & Hardening">مدیریت سرویس‌ها، Bash Scripting و امنیت</p>
+                </div>
+
+                <!-- Prometheus & Grafana -->
+                <div class="glass-panel p-5 rounded-2xl border border-gray-800 hover:border-orange-400/50 transition w-full overflow-hidden">
+                    <div class="flex items-center justify-between mb-3 gap-2">
+                        <i class="fa-solid fa-chart-line text-orange-400 text-2xl sm:text-3xl shrink-0"></i>
+                        <span class="text-[11px] font-mono text-orange-400 bg-orange-400/10 px-2 py-0.5 rounded truncate">Metrics</span>
+                    </div>
+                    <h3 class="font-bold text-white text-base truncate">Prometheus & Grafana</h3>
+                    <p class="text-xs text-gray-400 mt-2 prevent-overflow" data-fa="مانیتورینگ زنده و داشبوردهای سنجش عملکرد" data-en="Real-time Observability & Alerts">مانیتورینگ زنده و داشبوردهای سنجش عملکرد</p>
+                </div>
+
+                <!-- GitLab CI/CD -->
+                <div class="glass-panel p-5 rounded-2xl border border-gray-800 hover:border-orange-500/50 transition w-full overflow-hidden">
+                    <div class="flex items-center justify-between mb-3 gap-2">
+                        <i class="fa-brands fa-gitlab text-orange-500 text-2xl sm:text-3xl shrink-0"></i>
+                        <span class="text-[11px] font-mono text-orange-500 bg-orange-500/10 px-2 py-0.5 rounded truncate">Pipeline</span>
+                    </div>
+                    <h3 class="font-bold text-white text-base truncate">GitLab CI / GitHub Actions</h3>
+                    <p class="text-xs text-gray-400 mt-2 prevent-overflow" data-fa="تست، ساخت و دپلوی خودکار نرم‌افزارها" data-en="Automated Build, Test & Deploy">تست، ساخت و دپلوی خودکار نرم‌افزارها</p>
+                </div>
+
+                <!-- Nginx & Traefik -->
+                <div class="glass-panel p-5 rounded-2xl border border-gray-800 hover:border-emerald-400/50 transition w-full overflow-hidden">
+                    <div class="flex items-center justify-between mb-3 gap-2">
+                        <i class="fa-solid fa-network-wired text-emerald-400 text-2xl sm:text-3xl shrink-0"></i>
+                        <span class="text-[11px] font-mono text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded truncate">Ingress</span>
+                    </div>
+                    <h3 class="font-bold text-white text-base truncate">Nginx & Traefik Proxy</h3>
+                    <p class="text-xs text-gray-400 mt-2 prevent-overflow" data-fa="ریورس پروکسی، گواهی SSL و Load Balancing" data-en="Reverse Proxy & Load Balancing">ریورس پروکسی، گواهی SSL و Load Balancing</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Projects / Architecture Highlights -->
+        <section id="projects" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="flex items-center gap-3 mb-10">
+                <i class="fa-solid fa-diagram-project text-brand-cyan text-2xl shrink-0"></i>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white prevent-overflow" data-fa="نمونه‌های زیرساخت و پروژه‌ها" data-en="Architecture Accomplishments">نمونه‌های زیرساخت و پروژه‌ها</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Project 1 -->
+                <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-gray-800">
+                    <div class="text-xs font-mono text-brand-cyan mb-2">01. ORCHESTRATION</div>
+                    <h3 class="text-xl font-bold text-white mb-3 prevent-overflow" data-fa="راه اندازی کلاسترهای k3s با Ingress Traefik" data-en="Lightweight Kubernetes (k3s) Cluster">راه اندازی کلاسترهای k3s با Ingress Traefik</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 prevent-overflow" data-fa="طراحی و پیاده‌سازی کلاسترهای کم‌حجم کوبرنتیز جهت مدیریت سرویس‌های کانتینری همراه با مدیریت خودکار گواهی‌های SSL توسط Let's Encrypt." data-en="Designed high-availability k3s clusters running containerized microservices with Traefik ingress controller and automated SSL certificates.">
+                        طراحی و پیاده‌سازی کلاسترهای کم‌حجم کوبرنتیز جهت مدیریت سرویس‌های کانتینری همراه با مدیریت خودکار گواهی‌های SSL توسط Let's Encrypt.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-gray-800 text-gray-300 text-xs font-mono">Kubernetes</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-gray-800 text-gray-300 text-xs font-mono">Traefik</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-gray-800 text-gray-300 text-xs font-mono">Helm</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-gray-800">
+                    <div class="text-xs font-mono text-emerald-400 mb-2">02. CI/CD & REGISTRY</div>
+                    <h3 class="text-xl font-bold text-white mb-3 prevent-overflow" data-fa="خط لوله خودکار GitLab CI به Nexus Registry" data-en="GitLab CI/CD & Sonatype Nexus Automation">خط لوله خودکار GitLab CI به Nexus Registry</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 prevent-overflow" data-fa="ایجاد پایپ‌لاین‌های خودکار جهت بیلد، تست کدها و آپلود ایمیج‌های داکر بر روی مخزن اختصاصی Nexus Artifact Registry." data-en="Automated multi-branch pipelines pushing verified Docker images directly into a private Sonatype Nexus registry.">
+                        ایجاد پایپ‌لاین‌های خودکار جهت بیلد، تست کدها و آپلود ایمیج‌های داکر بر روی مخزن اختصاصی Nexus Artifact Registry.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-lg bg-gray-800 text-gray-300 text-xs font-mono">GitLab CI</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-gray-800 text-gray-300 text-xs font-mono">Nexus</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-gray-800 text-gray-300 text-xs font-mono">Docker</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Terminal -->
+        <section id="terminal" class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2" data-fa="ترمینال تعاملی وب" data-en="Interactive Web Terminal">ترمینال تعاملی وب</h2>
+                <p class="text-gray-400 text-sm font-mono" data-fa="دستوراتی مانند help، skills، contact یا clear را تایپ کنید:" data-en="Type commands like help, skills, contact, or clear:">دستوراتی مانند help، skills، contact یا clear را تایپ کنید:</p>
+            </div>
+
+            <div class="glass-panel rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+                <div class="bg-gray-900/90 px-4 py-3 flex items-center justify-between border-b border-gray-800 dir-ltr">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                        <span class="ml-2 text-xs font-mono text-gray-400">yashar@devops-node:~</span>
+                    </div>
+                </div>
+
+                <div class="p-4 sm:p-6 font-mono text-xs sm:text-sm bg-brand-terminal scanlines h-72 overflow-y-auto flex flex-col justify-between dir-ltr" id="term-body">
+                    <div id="terminal-output" class="space-y-2 text-gray-300">
+                        <p class="text-gray-400">Welcome to Yashar Rezvani's terminal v2.5.0</p>
+                        <p class="text-gray-400">Type <span class="text-brand-cyan font-bold">help</span> to list commands.</p>
+                    </div>
+
+                    <form id="terminal-form" class="flex items-center gap-2 mt-4 pt-2 border-t border-gray-800">
+                        <span class="text-brand-cyan font-bold shrink-0">guest@yashar:~$</span>
+                        <input type="text" id="terminal-input" class="flex-1 bg-transparent border-none outline-none text-white font-mono text-sm focus:ring-0 w-full" placeholder="type a command..." autocomplete="off">
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-gray-800 text-center relative overflow-hidden">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-4 prevent-overflow" data-fa="ارتباط با مهندس یاشار رضوانی" data-en="Contact Eng. Yashar Rezvani">ارتباط با مهندس یاشار رضوانی</h2>
+                <p class="text-gray-400 max-w-xl mx-auto mb-8 text-sm prevent-overflow" data-fa="جهت همکاری در پروژه‌های دواپس، مدیریت سرور یا مشاوره زیرساخت پیام بفرستید." data-en="Reach out for DevOps consulting, cloud infrastructure, or Kubernetes projects.">
+                    جهت همکاری در پروژه‌های دواپس، مدیریت سرور یا مشاوره زیرساخت پیام بفرستید.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-6 mb-8 text-sm font-mono">
+                    <a href="https://github.com/yasharrezvani" target="_blank" class="flex items-center gap-2 text-gray-300 hover:text-brand-cyan transition">
+                        <i class="fa-brands fa-github text-xl"></i> GitHub Profile
+                    </a>
+                    <button onclick="copyEmail()" class="flex items-center gap-2 text-gray-300 hover:text-brand-cyan transition">
+                        <i class="fa-solid fa-envelope text-xl"></i> Direct Email
+                    </button>
+                </div>
+
+                <form onsubmit="handleContact(event)" class="max-w-md mx-auto space-y-4 text-right" id="contact-form">
+                    <input type="text" required placeholder="نام شما / Your Name" class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-brand-cyan transition">
+                    <input type="email" required placeholder="ایمیل / Email Address" class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-brand-cyan transition">
+                    <textarea required rows="3" placeholder="متن پیام / Message..." class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-brand-cyan transition"></textarea>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-brand-cyan text-black font-bold hover:shadow-lg hover:shadow-brand-cyan/20 transition duration-300">
+                        <span data-fa="ارسال پیام" data-en="Send Message">ارسال پیام</span>
+                    </button>
+                </form>
+                <div id="contact-msg" class="hidden mt-4 text-xs font-mono text-emerald-400"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-900 text-center font-mono text-xs text-gray-500">
+        <p>© 2026 مهندس یاشار رضوانی | Yashar Rezvani. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        let currentLang = 'fa';
+
+        // Robust Avatar Error Handling
+        function handleImageError(img) {
+            // Generate inline dynamic SVG avatar if local file isn't found
+            const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%"><rect width="500" height="500" fill="%230f172a"/><circle cx="250" cy="200" r="100" fill="%2300d4ff" opacity="0.3"/><circle cx="250" cy="180" r="70" fill="%2338bdf8"/><path d="M 100 450 C 120 300, 380 300, 400 450 Z" fill="%231e293b"/><text x="250" y="470" font-family="sans-serif" font-size="20" fill="%2300d4ff" text-anchor="middle" font-weight="bold">YASHAR REZVANI</text></svg>`;
+            img.src = fallbackSvg;
+        }
+
+        // Toggle Language Function
+        function toggleLanguage() {
+            currentLang = currentLang === 'fa' ? 'en' : 'fa';
+            const html = document.documentElement;
+            const langLabel = document.getElementById('lang-label');
+            const pageTitle = document.getElementById('page-title');
+
+            if (currentLang === 'en') {
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                langLabel.innerText = 'FA / فارسی';
+                pageTitle.innerText = 'Eng. Yashar Rezvani | Senior DevOps & Infrastructure Engineer';
+            } else {
+                html.setAttribute('lang', 'fa');
+                html.setAttribute('dir', 'rtl');
+                langLabel.innerText = 'EN / English';
+                pageTitle.innerText = 'مهندس یاشار رضوانی | مهندس ارشد دواپس و زیرساخت';
+            }
+
+            // Update all text elements with data attributes
+            document.querySelectorAll('[data-fa]').forEach(el => {
+                const text = el.getAttribute(`data-${currentLang}`);
+                if (text) el.innerText = text;
+            });
+        }
+
+        // Copy Email Function
+        function copyEmail() {
+            const email = "yashar.rezvani@example.com";
+            const tempInput = document.createElement('textarea');
+            tempInput.value = email;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const copyBtn = document.getElementById('copyText');
+            const originalText = copyBtn.innerText;
+            copyBtn.innerText = currentLang === 'fa' ? 'ایمیل کپی شد!' : 'Copied!';
+            setTimeout(() => {
+                copyBtn.innerText = originalText;
+            }, 2000);
+        }
+
+        // Handle Contact Form
+        function handleContact(e) {
+            e.preventDefault();
+            const msg = document.getElementById('contact-msg');
+            msg.classList.remove('hidden');
+            msg.innerText = currentLang === 'fa' ? '✓ پیام شما با موفقیت ارسال شد.' : '✓ Your message has been sent successfully.';
+            e.target.reset();
+            setTimeout(() => {
+                msg.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Interactive Web Terminal
+        const termForm = document.getElementById('terminal-form');
+        const termInput = document.getElementById('terminal-input');
+        const termOutput = document.getElementById('terminal-output');
+        const termBody = document.getElementById('term-body');
+
+        const termCommands = {
+            'help': 'Commands: <span class="text-brand-cyan">skills</span>, <span class="text-brand-cyan">whoami</span>, <span class="text-brand-cyan">projects</span>, <span class="text-brand-cyan">contact</span>, <span class="text-brand-cyan">clear</span>',
+            'skills': 'Kubernetes, Docker, Ansible, Terraform, Linux (Ubuntu/Debian), Prometheus, Grafana, GitLab CI/CD, Nginx, Traefik.',
+            'whoami': 'Eng. Yashar Rezvani - Senior DevOps & Cloud Infrastructure Engineer.',
+            'projects': '1. Lightweight k3s Kubernetes Clusters\n2. GitLab CI to Nexus Artifact Registry Pipelines',
+            'contact': 'GitHub: github.com/yasharrezvani | Email: yashar.rezvani@example.com'
+        };
+
+        termForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const val = termInput.value.trim().toLowerCase();
+            termInput.value = '';
+
+            if(!val) return;
+
+            const cmdPara = document.createElement('p');
+            cmdPara.innerHTML = `<span class="text-brand-cyan">guest@yashar:~$</span> ${val}`;
+            termOutput.appendChild(cmdPara);
+
+            if (val === 'clear') {
+                termOutput.innerHTML = '';
+                return;
+            }
+
+            const resPara = document.createElement('p');
+            resPara.className = 'text-gray-300 pl-2 border-l-2 border-brand-cyan/40';
+            
+            if (termCommands[val]) {
+                resPara.innerHTML = termCommands[val];
+            } else {
+                resPara.innerHTML = `<span class="text-red-400">command not found: ${val}</span>. Type <span class="text-brand-cyan">help</span>.`;
+            }
+
+            termOutput.appendChild(resPara);
+            termBody.scrollTop = termBody.scrollHeight;
+        });
+    </script>
+</body>
+</html>
